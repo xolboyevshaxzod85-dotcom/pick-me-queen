@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀 ВАША КОРОЛЕВА ЗДЕСЬ 🎀</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            font-family: 'Fredoka One', cursive; 
+            background: #ff0077;
+            overflow-x: hidden;
+            cursor: url('https://cur.cursors-4u.net/symbols/sym-1/sym46.cur'), auto;
+        }
+
+        /* Тряска экрана (Режим истерики) */
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            50% { transform: translate(-1px, 2px) rotate(1deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            100% { transform: translate(1px, -2px) rotate(0deg); }
+        }
+        .hysteria { animation: shake 0.5s infinite; }
+
+        /* Кислотный текст */
+        .queen-text {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -5px;
+            background: linear-gradient(to bottom, #fff 30%, #ff00ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(5px 5px 0px #4b0082);
+        }
+
+        /* Анимация мигания (как на старых сайтах) */
+        .blink { animation: blinker 0.8s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+        .floating-obj {
+            position: fixed;
+            z-index: 40;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px white);
+        }
+    </style>
+</head>
+<body class="bg-[#ff0077]">
+
+    <img id="kitty" src="https://www.pngarts.com/files/12/Hello-Kitty-PNG-Image-Background-Transparent.png" class="floating-obj w-48 top-5 left-5">
+    <img id="kuromi" src="https://p7.hiclipart.com/preview/1000/775/543/kuromi-my-melody-sanrio-hello-kitty-others.jpg" class="floating-obj w-40 top-1/2 right-10 opacity-80" style="mix-blend-mode: multiply;">
+    <img id="heart" src="https://www.pngall.com/wp-content/uploads/12/Y2K-Heart-PNG-Cutout.png" class="floating-obj w-32 bottom-10 left-10">
+    <img id="sparkle" src="https://www.pngall.com/wp-content/uploads/12/Y2K-Star-PNG-File.png" class="floating-obj w-24 top-20 right-1/4">
+
+    <main id="main-content" class="relative z-10">
+        
+        <section class="min-h-screen flex flex-col items-center justify-center text-center p-4">
+            <p class="blink text-white text-2xl mb-4 italic">~ scroll for perfection ~</p>
+            <h1 class="queen-text text-[80px] md:text-[180px] leading-none">
+                PICK ME<br>BABY
+            </h1>
+            <div class="mt-8 bg-black text-white p-4 border-4 border-dashed border-white -rotate-3 text-xl">
+                Упс! Кажется, ты зашел на территорию Совершенства 💅
+            </div>
+        </section>
+
+        <section class="min-h-screen flex items-center justify-center p-6">
+            <div class="max-w-4xl bg-white/10 backdrop-blur-md border-[10px] border-double border-white p-12 rounded-none transform rotate-2">
+                <h2 class="text-5xl font-black mb-10 underline decoration-yellow-300">МОЙ DAILY СПИСОК:</h2>
+                <div class="space-y-6 text-3xl font-bold italic">
+                    <p class="hover:text-yellow-300 transition cursor-default">✨ 08:00 — Проснулась великолепной</p>
+                    <p class="hover:text-yellow-300 transition cursor-default">✨ 12:00 — Проигнорила твоё "привет"</p>
+                    <p class="hover:text-yellow-300 transition cursor-default">✨ 15:00 — Была слишком крутой для этой планеты</p>
+                    <p class="hover:text-yellow-300 transition cursor-default">✨ 20:00 — Посмотрела в зеркало и влюбилась</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="min-h-screen flex flex-col items-center justify-center">
+            <h2 class="text-4xl text-center mb-10 px-4">СЛИШКОМ МНОГО ВНИМАНИЯ?<br>МНЕ НУЖНО ЕЩЕ!</h2>
+            
+            <button onclick="startHysteria()" class="group relative bg-white text-black text-4xl font-black px-16 py-8 rounded-full shadow-[0_20px_0_#4b0082] hover:shadow-none hover:translate-y-4 transition-all">
+                НАЖМИ ДЛЯ ВЗРЫВА ЧСВ
+                <span class="absolute -top-10 -right-10 text-6xl group-hover:animate-ping">👑</span>
+            </button>
+            
+            <p class="mt-12 text-pink-200 animate-pulse italic">Твоё мнение было удалено из чата автоматически.</p>
+        </section>
+
+    </main>
+
+    <script>
+        // Движение картинок при скролле
+        window.addEventListener('scroll', () => {
+            const scroll = window.scrollY;
+            document.getElementById('kitty').style.transform = `translate(${scroll * 0.1}px, ${scroll * 0.3}px) rotate(${scroll * 0.2}deg)`;
+            document.getElementById('kuromi').style.transform = `translate(${scroll * -0.2}px, ${scroll * -0.1}px) rotate(${scroll * -0.1}deg)`;
+            document.getElementById('heart').style.transform = `scale(${1 + scroll * 0.001}) rotate(${scroll * 0.5}deg)`;
+            document.getElementById('sparkle').style.transform = `translateY(${scroll * -0.5}px) scale(${1.5})`;
+        });
+
+        // Функция истерики
+        function startHysteria() {
+            const body = document.getElementById('main-content');
+            body.classList.add('hysteria');
+            
+            // Через 2 секунды выключаем тряску
+            setTimeout(() => {
+                body.classList.remove('hysteria');
+                alert('Упс! Твой компьютер почти не выдержал моей харизмы 💅');
+            }, 2000);
+
+            // Добавляем эффект вылетающих сердечек
+            for(let i=0; i<15; i++) {
+                createEmoji('💖');
+            }
+        }
+
+        function createEmoji(emoji) {
+            const el = document.createElement('div');
+            el.innerHTML = emoji;
+            el.style.position = 'fixed';
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.top = '100vh';
+            el.style.fontSize = '3rem';
+            el.style.zIndex = '100';
+            el.style.transition = 'all 2s ease-out';
+            document.body.appendChild(el);
+
+            setTimeout(() => {
+                el.style.top = '-10vh';
+                el.style.left = (Math.random() * 100) + 'vw';
+                el.style.transform = `rotate(${Math.random() * 360}deg)`;
+            }, 100);
+
+            setTimeout(() => el.remove(), 2100);
+        }
+    </script>
+</body>
+</html>
