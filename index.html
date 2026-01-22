@@ -3,151 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>🎀 ТЕРРИТОРИЯ СОВЕРШЕНСТВА 🎀</title>
+    <title>🎀 PICK ME LABYRINTH 🎀</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --pink: #ff007f;
+            --yellow: #fff200;
+        }
+
         body { 
-            background-color: #ff007f;
+            background-color: var(--pink);
             font-family: 'Montserrat', sans-serif;
             overflow-x: hidden;
             margin: 0;
             color: white;
+            transition: background 0.5s ease;
         }
 
-        /* Полосатый фон как на макете */
         .bg-pattern {
-            background: repeating-linear-gradient(
-                45deg,
-                #ff007f,
-                #ff007f 40px,
-                #ff1a8c 40px,
-                #ff1a8c 80px
-            );
+            background: repeating-linear-gradient(45deg, var(--pink), var(--pink) 40px, #ff1a8c 40px, #ff1a8c 80px);
             min-height: 100vh;
         }
 
-        /* Текст с контуром (Mega Text) */
         .outline-text {
-            font-size: clamp(3rem, 15vw, 10rem);
+            font-size: clamp(2.5rem, 12vw, 8rem);
             line-height: 0.8;
             text-transform: uppercase;
             -webkit-text-stroke: 2px black;
-            paint-order: stroke fill;
-            filter: drop-shadow(8px 8px 0px #fff200);
+            filter: drop-shadow(6px 6px 0px var(--yellow));
         }
 
-        /* Карточки с переполнением */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 6px solid white;
-            box-shadow: 15px 15px 0px black;
-            padding: 2rem;
-            transform: rotate(-2deg);
-        }
-
-        /* Анимация летящих элементов */
-        .floating {
-            position: fixed;
+        /* Стиль кнопок-переходов (иконки) */
+        .portal-icon {
             font-size: 4rem;
-            pointer-events: none;
-            z-index: 1;
-            animation: floatUp 6s linear infinite;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(5px 5px 0px black);
+            display: inline-block;
+        }
+        .portal-icon:hover {
+            transform: scale(1.5) rotate(15deg);
+            filter: drop-shadow(10px 10px 0px var(--yellow));
         }
 
+        .level-card {
+            background: white;
+            border: 6px solid black;
+            color: black;
+            padding: 2rem;
+            box-shadow: 15px 15px 0px var(--yellow);
+            display: none; /* Скрыто по умолчанию */
+        }
+
+        .level-active { display: block; animation: popIn 0.5s both; }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5) rotate(-10deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .floating-sticker {
+            position: absolute;
+            background: black;
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            z-index: 20;
+        }
+
+        /* Анимация летящего мусора (декора) */
+        .float { position: fixed; pointer-events: none; z-index: 0; animation: floatUp 5s linear infinite; }
         @keyframes floatUp {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(110vh) rotate(0deg); }
+            100% { transform: translateY(-20vh) rotate(360deg); }
         }
-
-        /* Кастомный скроллбар */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #ff007f; }
-        ::-webkit-scrollbar-thumb { background: #fff200; border: 2px solid black; }
     </style>
 </head>
 <body class="bg-pattern">
 
-    <div class="floating" style="left: 10%; animation-delay: 0s;">🎀</div>
-    <div class="floating" style="left: 30%; animation-delay: 2s;">💖</div>
-    <div class="floating" style="left: 70%; animation-delay: 4s;">✨</div>
-    <div class="floating" style="left: 85%; animation-delay: 1s;">🐱</div>
+    <div class="float text-6xl" style="left: 5%; animation-delay: 0s;">🎀</div>
+    <div class="float text-5xl" style="left: 80%; animation-delay: 2s;">💎</div>
+    <div class="float text-7xl" style="left: 40%; animation-delay: 1s;">✨</div>
 
-    <section class="relative min-h-screen flex flex-col items-center justify-center text-center p-4 z-10">
-        <h1 class="outline-text mb-8">
-            PICK ME<br><span style="-webkit-text-stroke: 2px #fff200; filter: drop-shadow(8px 8px 0px black);">OR DIE</span>
-        </h1>
+    <main class="relative z-10 min-h-screen flex flex-col items-center justify-center p-6 text-center">
         
-        <div class="bg-white text-pink-600 px-8 py-4 rounded-full text-xl font-black shadow-2xl animate-bounce border-4 border-black">
-            Листай вниз, если осмелишься 💅
+        <div id="level1" class="level-active space-y-8">
+            <h1 class="outline-text">УРОВЕНЬ 1:<br>КТО ТУТ<br>ГЛАВНАЯ?</h1>
+            <div class="glass-card bg-white/20 p-6 border-4 border-white rotate-2">
+                <p class="text-2xl font-black">Я не такая, как остальные. Я — оригинал, они — плохая копия. 💅</p>
+            </div>
+            <p class="text-yellow-300 font-bold animate-pulse">ЖМИ НА БАНТ, ЧТОБЫ УЗНАТЬ БОЛЬШЕ 👇</p>
+            <div class="portal-icon" onclick="nextLevel(2)">🎀</div>
         </div>
 
-        <p class="mt-10 text-yellow-300 font-bold tracking-widest uppercase italic">
-            Попробуй не влюбиться за 10 секунд...
-        </p>
-    </section>
-
-    <section class="min-h-screen flex items-center justify-center p-6 z-10 relative">
-        <div class="glass-card w-full max-w-2xl">
-            <h2 class="text-4xl md:text-6xl font-black mb-8 text-yellow-300">ПОЧЕМУ Я — ЭТО ТВОЙ ИДЕАЛ:</h2>
-            <ul class="space-y-6 text-xl md:text-3xl font-bold">
-                <li class="flex items-start gap-4">
-                    <span>🎀</span>
-                    <span>Мой сарказм — это отдельный вид искусства.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                    <span>🎀</span>
-                    <span>Твой вкус автоматически улучшился, пока ты это читаешь.</span>
-                </li>
-                <li class="flex items-start gap-4">
-                    <span>🎀</span>
-                    <span>Я не ищу внимания — это оно преследует меня.</span>
-                </li>
-            </ul>
+        <div id="level2" class="space-y-8">
+            <h1 class="outline-text" style="filter: drop-shadow(6px 6px 0px #00ffff);">УРОВЕНЬ 2:<br>БЕЗУМИЕ<br>СТИЛЯ</h1>
+            <div class="level-card">
+                <h3 class="text-3xl font-black mb-4 uppercase text-pink-600">Осторожно!</h3>
+                <p class="text-xl font-bold italic">Моя харизма может ослепить. Если ты всё ещё здесь — ты мой фанат номер один. Не отрицай это!</p>
+            </div>
+            <p class="text-white font-bold">ЖМИ НА КОРОНУ, ЕСЛИ ГОТОВ К ШОКУ 👇</p>
+            <div class="portal-icon" onclick="nextLevel(3)">👑</div>
         </div>
-    </section>
 
-    <section class="py-20 bg-black text-white overflow-hidden">
-        <div class="whitespace-nowrap flex animate-[scroll_10s_linear_infinite]">
-            <span class="text-8xl font-black mx-10">BECAUSE I'M ICONIC 💅</span>
-            <span class="text-8xl font-black mx-10 text-pink-500">BECAUSE I'M ICONIC 💅</span>
-            <span class="text-8xl font-black mx-10">BECAUSE I'M ICONIC 💅</span>
+        <div id="level3" class="space-y-8">
+            <h1 class="outline-text" style="filter: drop-shadow(6px 6px 0px #ff00ff); -webkit-text-stroke: 2px white;">FINAL<br>BOSS<br>GIRL</h1>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-black text-white p-4 border-2 border-white rotate-3">ТЫ</div>
+                <div class="bg-white text-black p-4 border-2 border-black -rotate-3">ВЛЮБЛЁН</div>
+            </div>
+            <p class="text-4xl font-black italic">Я ПРЕДУПРЕЖДАЛА. 💅</p>
+            <button onclick="nextLevel(1)" class="bg-yellow-300 text-black px-10 py-5 text-2xl font-black border-4 border-black hover:bg-white transition">
+                ВЕРНУТЬСЯ НА ТРОН
+            </button>
         </div>
-    </section>
 
-    <style>
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-    </style>
+    </main>
 
-    <script>
-        // Интерактив для телефона: при касании экрана вылетают искорки
-        document.addEventListener('touchstart', (e) => {
-            const star = document.createElement('div');
-            star.innerHTML = '✨';
-            star.style.position = 'fixed';
-            star.style.left = e.touches[0].clientX + 'px';
-            star.style.top = e.touches[0].clientY + 'px';
-            star.style.fontSize = '2rem';
-            star.style.pointerEvents = 'none';
-            star.style.zIndex = '1000';
-            star.style.transition = 'transform 1s, opacity 1s';
-            document.body.appendChild(star);
-
-            setTimeout(() => {
-                star.style.transform = 'translateY(-100px) scale(2)';
-                star.style.opacity = '0';
-            }, 10);
-
-            setTimeout(() => star.remove(), 1000);
-        });
-    </script>
-
-</body>
-</html>
+    <div class="fixed bottom-0 w-full bg-black py-2 overflow-hidden whitespace-nowrap z-50">
+        <div class="animate-[scroll_15s_linear_infinite] inline-block text-white font-black text-xl">
+            PICK ME • CHOOSE ME • LOVE ME • I'M THE BEST • YOU ARE OBSESSED • 🎀 • 💅 • ✨ • 
+            PICK ME • CH
