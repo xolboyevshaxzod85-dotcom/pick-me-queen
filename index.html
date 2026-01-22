@@ -3,147 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>👑 ВЛАДЕНИЯ КОРОЛЕВЫ 👑</title>
+    <title>🎀 ТЕРРИТОРИЯ ГЛАВНОЙ ГЕРОИНИ 🎀</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --main-pink: #ff007f;
+            --hot-pink: #ff1a8c;
+            --yellow: #fff200;
+        }
+
         body { 
-            font-family: 'Fredoka One', cursive; 
-            background: #ff0077;
-            overflow-x: hidden;
-            touch-action: manipulation; /* Убирает задержку клика на телефоне */
-        }
-
-        .queen-text {
+            background-color: var(--main-pink);
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom, #fff 20%, #ff00ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(4px 4px 0px #4b0082);
+            overflow-x: hidden;
+            color: white;
         }
 
-        .floating-obj {
+        /* Полосатый фон */
+        .bg-stripes {
+            background: repeating-linear-gradient(
+                45deg,
+                var(--main-pink),
+                var(--main-pink) 30px,
+                var(--hot-pink) 30px,
+                var(--hot-pink) 60px
+            );
+        }
+
+        /* Огромный текст с контуром */
+        .mega-text {
+            font-size: clamp(2.5rem, 12vw, 9rem);
+            line-height: 0.85;
+            text-transform: uppercase;
+            text-align: center;
+            -webkit-text-stroke: 3px black;
+            filter: drop-shadow(10px 10px 0px var(--yellow));
+            margin-bottom: 20px;
+        }
+
+        /* Карточки в стиле Bento */
+        .bento-card {
+            background: white;
+            border: 6px solid black;
+            color: black;
+            padding: 30px;
+            box-shadow: 15px 15px 0px black;
+            transition: 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .bento-card:hover {
+            transform: translate(-10px, -10px);
+            box-shadow: 25px 25px 0px var(--yellow);
+        }
+
+        /* Наклейки */
+        .sticker {
+            position: absolute;
+            background: var(--yellow);
+            color: black;
+            border: 3px solid black;
+            padding: 5px 15px;
+            font-weight: 900;
+            z-index: 50;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        /* Секция с горизонтальным переполнением */
+        .horizontal-flow {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 40px 20px;
+            cursor: grab;
+        }
+        .horizontal-flow::-webkit-scrollbar { display: none; }
+
+        /* Анимация плавающих сердец */
+        .float-emoji {
             position: fixed;
-            z-index: 40;
-            pointer-events: auto; /* Теперь по ним можно кликать! */
-            filter: drop-shadow(0 0 10px white);
-            cursor: pointer;
-            transition: transform 0.1s ease-out;
+            pointer-events: none;
+            z-index: 100;
+            animation: flyUp 5s linear infinite;
         }
-
-        /* Золотой режим */
-        .gold-mode {
-            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffd700) !important;
-            animation: goldBg 2s infinite;
-        }
-        @keyframes goldBg {
-            0% { filter: hue-rotate(0deg); }
-            50% { filter: brightness(1.2); }
-            100% { filter: hue-rotate(0deg); }
-        }
-
-        .counter-box {
-            background: rgba(0, 0, 0, 0.8);
-            border: 2px solid white;
-            box-shadow: 5px 5px 0px #ff00ff;
+        @keyframes flyUp {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
-<body id="body-bg">
+<body class="bg-stripes">
 
-    <img id="kitty" onclick="registerKittyClick()" src="https://www.pngarts.com/files/12/Hello-Kitty-PNG-Image-Background-Transparent.png" class="floating-obj w-32 md:w-48 top-5 left-5">
-    <img id="heart" src="https://www.pngall.com/wp-content/uploads/12/Y2K-Heart-PNG-Cutout.png" class="floating-obj w-20 md:w-32 bottom-10 right-10">
-
-    <div class="fixed top-4 right-4 z-50 counter-box p-3 text-white text-center rounded-lg">
-        <p class="text-xs uppercase opacity-70">Слуг в подчинении:</p>
-        <p id="fan-counter" class="text-2xl font-bold text-yellow-300">1,240,503</p>
-    </div>
-
-    <main id="main-content" class="relative z-10">
+    <header class="min-h-screen flex flex-col items-center justify-center relative p-6">
+        <div class="sticker top-10 left-5 -rotate-12">ВНИМАНИЕ!</div>
+        <div class="sticker bottom-10 right-5 rotate-6 bg-white">#ICONIC</div>
         
-        <section class="min-h-screen flex flex-col items-center justify-center text-center p-4">
-            <h1 id="main-title" class="queen-text text-[60px] md:text-[150px] leading-none mb-4">
-                PICK ME<br>OR DIE
-            </h1>
-            <div class="bg-white text-pink-600 px-6 py-2 rounded-full font-bold shadow-xl animate-bounce">
-                Листай вниз, если осмелишься 💅
-            </div>
-            <p class="mt-10 text-white opacity-50 text-sm">Попробуй поймать Китти 10 раз...</p>
-        </section>
+        <h1 class="mega-text">
+            ТЫ В ЗОНЕ<br>МОЕГО<br><span class="text-black" style="-webkit-text-stroke: 3px white;">ВЛИЯНИЯ!</span>
+        </h1>
 
-        <section class="min-h-screen flex items-center justify-center p-6">
-            <div class="w-full max-w-md bg-black/30 backdrop-blur-xl border-4 border-white p-8 rounded-3xl transform -rotate-2">
-                <h2 class="text-3xl font-black mb-6 text-yellow-300 italic">ПОЧЕМУ Я — ЭТО ТВОЙ ИДЕАЛ:</h2>
-                <ul class="space-y-4 text-xl">
-                    <li class="flex items-center">🎀 <span>Мой сарказм — это искусство</span></li>
-                    <li class="flex items-center">🎀 <span>Твой вкус улучшился, когда ты зашел сюда</span></li>
-                    <li class="flex items-center">🎀 <span>Я не ищу внимания, оно само меня находит</span></li>
-                </ul>
-            </div>
-        </section>
+        <div class="mt-10 bg-black text-white px-10 py-5 rounded-none border-4 border-white text-xl md:text-3xl font-black uppercase rotate-2">
+            Приготовься... Будь достоин!
+        </div>
+    </header>
 
-        <section class="min-h-screen flex flex-col items-center justify-center">
-            <button onclick="boom()" class="bg-yellow-300 text-black text-3xl font-black px-12 py-6 rounded-full border-b-8 border-yellow-600 active:border-0 active:translate-y-2 transition-all">
-                ТЫКНИ В МЕНЯ!
-            </button>
-            <p id="secret-msg" class="mt-6 text-white font-bold h-8 text-xl"></p>
-        </section>
+    <section class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        
+        <div class="bento-card rotate-1">
+            <div class="text-7xl mb-4">🐱</div>
+            <h3 class="text-3xl font-black italic">ЭТО МОЙ МИР</h3>
+            <p class="text-xl mt-4 font-bold">Ты здесь всего лишь гость, так что веди себя подобающе. Восхищение приветствуется!</p>
+        </div>
 
-    </main>
+        <div class="bento-card -rotate-2 bg-yellow-300">
+            <div class="text-7xl mb-4">👑</div>
+            <h3 class="text-3xl font-black italic">ПРАВИЛО №1</h3>
+            <p class="text-xl mt-4 font-bold">Главная героиня здесь я. Остальные — массовка. Твой лайк уже засчитан автоматически.</p>
+        </div>
+
+        <div class="bento-card rotate-3">
+            <div class="text-7xl mb-4">💅</div>
+            <h3 class="text-3xl font-black italic">БЕЗУПРЕЧНОСТЬ</h3>
+            <p class="text-xl mt-4 font-bold">Правописание проверено, стиль утверждён, ЧСВ на максимуме. Листай дальше!</p>
+        </div>
+
+    </section>
+
+    <section class="mt-20 bg-black py-10">
+        <h2 class="text-white text-center text-4xl font-black mb-5 uppercase tracking-tighter">Больше обожания! 👇</h2>
+        <div class="horizontal-flow">
+            <div class="min-w-[300px] h-[400px] bg-pink-400 border-4 border-white flex items-center justify-center text-8xl">🎀</div>
+            <div class="min-w-[300px] h-[400px] bg-white border-4 border-black flex items-center justify-center text-8xl">🦄</div>
+            <div class="min-w-[300px] h-[400px] bg-yellow-300 border-4 border-white flex items-center justify-center text-8xl">💖</div>
+            <div class="min-w-[300px] h-[400px] bg-purple-500 border-4 border-white flex items-center justify-center text-8xl">✨</div>
+            <div class="min-w-[300px] h-[400px] bg-blue-400 border-4 border-white flex items-center justify-center text-8xl">💎</div>
+        </div>
+    </section>
+
+    <footer class="min-h-screen flex flex-col items-center justify-center text-center p-6 bg-white text-black mt-20">
+        <h2 class="mega-text !text-black" style="-webkit-text-stroke: 3px var(--main-pink);">ЭТО ЕЩЁ НЕ ВСЁ!</h2>
+        <p class="text-2xl font-black max-w-2xl">
+            Ты только что просмотрел самый важный сайт в своей жизни. Теперь ты можешь идти, но твоё сердце навсегда осталось здесь.
+        </p>
+        <div class="mt-10 flex space-x-4">
+            <div class="w-16 h-16 bg-pink-500 rounded-full animate-ping"></div>
+            <div class="w-16 h-16 bg-pink-500 rounded-full animate-ping" style="animation-delay: 0.3s"></div>
+            <div class="w-16 h-16 bg-pink-500 rounded-full animate-ping" style="animation-delay: 0.6s"></div>
+        </div>
+    </footer>
 
     <script>
-        let kittyClicks = 0;
-        let fanCount = 1240503;
-
-        // 1. Автоматический рост счетчика фанатов
-        setInterval(() => {
-            fanCount += Math.floor(Math.random() * 5);
-            document.getElementById('fan-counter').innerText = fanCount.toLocaleString();
-        }, 2000);
-
-        // 2. Логика кликов по Китти
-        function registerKittyClick() {
-            kittyClicks++;
-            const kitty = document.getElementById('kitty');
+        // Функция создания летающих эмодзи (Китти-вайб)
+        function createFlyingEmoji() {
+            const emojis = ['🎀', '💖', '✨', '🐱', '🍭', '🌸'];
+            const el = document.createElement('div');
+            el.className = 'float-emoji';
+            el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 3 + 2) + 'rem';
+            el.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(el);
             
-            // Эффект при клике по ней
-            kitty.style.transform = 'scale(1.5)';
-            setTimeout(() => kitty.style.transform = 'scale(1)', 200);
-
-            if (kittyClicks === 10) {
-                document.getElementById('body-bg').classList.add('gold-mode');
-                document.getElementById('main-title').innerText = "THE GOLDEN QUEEN";
-                alert("✨ УЛЬТРА-ГЛАМУР АКТИВИРОВАН! ✨\nТеперь ты официально в моем фан-клубе.");
-            }
+            setTimeout(() => el.remove(), 7000);
         }
 
-        // 3. Фразы при нажатии на кнопку
-        function boom() {
-            const msgs = ["Ой! Поаккуратнее!", "Хочешь автограф?", "Я знала, что ты нажмешь", "Блестяще!", "💅💅💅"];
-            const secret = document.getElementById('secret-msg');
-            secret.innerText = msgs[Math.floor(Math.random() * msgs.length)];
-            
-            // Тряска
-            document.getElementById('main-content').style.animation = 'shake 0.3s ease-in-out';
-            setTimeout(() => document.getElementById('main-content').style.animation = '', 300);
-        }
+        // Запускаем дождь из эмодзи
+        setInterval(createFlyingEmoji, 500);
 
-        // 4. Движение при скролле
-        window.addEventListener('scroll', () => {
-            const val = window.scrollY;
-            document.getElementById('kitty').style.left = (5 + val * 0.05) + '%';
-            document.getElementById('kitty').style.top = (5 + val * 0.1) + '%';
-            document.getElementById('heart').style.transform = `rotate(${val * 0.5}deg) scale(${1 + val * 0.0005})`;
+        // Интерактив: тряска при клике на любую карточку
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('click', () => {
+                card.style.transform = 'scale(1.1) rotate(5deg)';
+                setTimeout(() => card.style.transform = '', 200);
+            });
         });
     </script>
-
-    <style>
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-10px); }
-            75% { transform: translateX(10px); }
-        }
-    </style>
 </body>
 </html>
